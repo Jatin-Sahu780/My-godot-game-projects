@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://nrrqgy0huqo"]
+
+[ext_resource type="AudioStream" uid="uid://bfdis8iaas57j" path="res://bg music.mp3" id="1_2cagn"]
+[ext_resource type="Script" uid="uid://d1q0tx7pqfsf3" path="res://scenes/main_manu.gd" id="1_2py6s"]
+[ext_resource type="Texture2D" uid="uid://cxcmm1h3ce3yh" path="res://_0003_AllSkyFree_Screen_06.jpg" id="2_rkb45"]
+[ext_resource type="PackedScene" uid="uid://doscmtl5bvgy2" path="res://3d Models/Running Arc.fbx" id="4_gqecj"]
+[ext_resource type="AnimationLibrary" uid="uid://doellirr81dyf" path="res://Animation/Sitting.res" id="5_w8fri"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_uwv1k"]
+panorama = ExtResource("2_rkb45")
+
+[sub_resource type="Sky" id="Sky_mq3mc"]
+sky_material = SubResource("PanoramaSkyMaterial_uwv1k")
+
+[sub_resource type="Environment" id="Environment_wy21e"]
+background_mode = 2
+sky = SubResource("Sky_mq3mc")
+
+[node name="main Manu" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0301545, 0, 0)
+script = ExtResource("1_2py6s")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.8679, 0.161227, 0.469846, -0.496732, 0.286788, 0.819152, -0.00267711, -0.94433, 0.32899, 0, 0, 0)
+light_energy = 5.0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wy21e")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_top = 0.137346
+anchor_right = 0.0763889
+anchor_bottom = 0.733025
+offset_left = 1.0
+offset_top = -4.99999
+offset_right = 228.0
+offset_bottom = 35.0
+grow_vertical = 2
+size_flags_horizontal = 0
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Play" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Play"
+
+[node name="Quite" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 75
+text = "Quite"
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_2cagn")
+autoplay = true
+playback_type = 1
+emission_angle_enabled = true
+
+[node name="Running Arc" parent="AudioStreamPlayer3D" instance=ExtResource("4_gqecj")]
+transform = Transform3D(0.999999, 0, 0, 0, 0.999072, -0.0430614, 0, 0.0430614, 0.999072, 0.101178, -0.246438, 1.57878)
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="AudioStreamPlayer3D/Running Arc"]
+libraries = {
+"Sitting": ExtResource("5_w8fri")
+}
+
+[node name="Camera3D" type="Camera3D" parent="AudioStreamPlayer3D/Running Arc"]
+transform = Transform3D(0.999104, -0.00636356, 0.0418604, -0.00182328, 0.981259, 0.192687, -0.0423021, -0.19259, 0.980368, -0.411254, 0.810362, 1.72609)
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Quite" to="." method="_on_quite_pressed"]

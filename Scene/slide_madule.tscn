@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://tfrtlyor38to"]
+
+[ext_resource type="ArrayMesh" uid="uid://dv1xjnk5n21di" path="res://3d Models/slide module.obj" id="1_l7tba"]
+[ext_resource type="Script" uid="uid://cy7smvwrn6md6" path="res://scenes/module.gd" id="1_sugpx"]
+[ext_resource type="Material" uid="uid://dhmedct0sa4ou" path="res://materials/new_standard_material_3d.tres" id="2_frluo"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_0spht"]
+height = 2.15138
+radius = 0.251
+
+[node name="slide madule" type="Node3D"]
+transform = Transform3D(-1.31134e-07, 0, 3, 0, 3, 0, -3, 0, -1.31134e-07, 0, 0, 0)
+script = ExtResource("1_sugpx")
+metadata/_edit_group_ = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, -7.10543e-15, 0, 1, 0, 0, 0)
+material_override = ExtResource("2_frluo")
+lod_bias = 0.1
+mesh = ExtResource("1_l7tba")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(0.0987008, 0.995108, -0.00444322, -0.995117, 0.0986976, -0.000949512, -0.000506308, 0.00451521, 0.99999, 0.0248963, 0.684461, -0.00618458)
+shape = SubResource("CylinderShape3D_0spht")

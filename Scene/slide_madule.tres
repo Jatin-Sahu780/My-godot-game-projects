@@ -1,0 +1,22 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://oicrl3q6qnih"]
+
+[ext_resource type="Texture2D" uid="uid://dodm8q8g1gke5" path="res://textures/forest_leaves_02_diffuse_1k.jpg" id="1_b2g6u"]
+[ext_resource type="Texture2D" uid="uid://cvhinof170ept" path="res://textures/forest_leaves_02_ao_1k.jpg" id="2_1tn2p"]
+[ext_resource type="Texture2D" uid="uid://bec2j0ftplni0" path="res://textures/forest_leaves_02_disp_1k.jpg" id="3_88es5"]
+[ext_resource type="Texture2D" uid="uid://c1kohltxv014g" path="res://textures/forest_leaves_02_nor_gl_1k.jpg" id="4_yeg1g"]
+[ext_resource type="Texture2D" uid="uid://djngbjlfufnt2" path="res://textures/forest_leaves_02_rough_1k.jpg" id="5_nxq8a"]
+
+[resource]
+albedo_color = Color(0.79261, 0.94862, 0.94084, 1)
+albedo_texture = ExtResource("1_b2g6u")
+roughness_texture = ExtResource("5_nxq8a")
+emission = Color(0.00624755, 0.0235332, 0.0185148, 1)
+normal_enabled = true
+normal_texture = ExtResource("4_yeg1g")
+ao_enabled = true
+ao_light_affect = 1.0
+ao_texture = ExtResource("2_1tn2p")
+heightmap_scale = 4.726
+heightmap_texture = ExtResource("3_88es5")
+uv1_triplanar = true
+grow_amount = -0.077
