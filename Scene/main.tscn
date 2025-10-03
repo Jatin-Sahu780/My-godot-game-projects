@@ -1,0 +1,267 @@
+[gd_scene load_steps=23 format=3 uid="uid://cqsnj3ywkwlwn"]
+
+[ext_resource type="Script" uid="uid://b0ti3n4tr3knn" path="res://level.gd" id="1_84rds"]
+[ext_resource type="Script" uid="uid://dvx4f64vappy4" path="res://scenes/Global.gd" id="1_yspfj"]
+[ext_resource type="PackedScene" uid="uid://dkn57ao3nxjrs" path="res://scenes/jump_module.tscn" id="2_eqgi6"]
+[ext_resource type="Texture2D" uid="uid://d0cuqe1848x2r" path="res://_0003_AllSkyFree_Screen_06.jpg" id="2_trceg"]
+[ext_resource type="PackedScene" uid="uid://0qkpcya8n4yq" path="res://scenes/platform.tscn" id="3_elkjq"]
+[ext_resource type="PackedScene" uid="uid://tfrtlyor38to" path="res://scenes/slide_madule.tscn" id="4_6lro3"]
+[ext_resource type="PackedScene" uid="uid://doscmtl5bvgy2" path="res://3d Models/Running Arc.fbx" id="5_35wen"]
+[ext_resource type="Script" uid="uid://j424gqx477me" path="res://scenes/character_body_3d.gd" id="5_xoma1"]
+[ext_resource type="AnimationLibrary" uid="uid://4lbqn8sntefm" path="res://Animation/Running.res" id="6_n5y23"]
+[ext_resource type="AnimationLibrary" uid="uid://3rqef7s7uxkh" path="res://Animation/Ninja.res" id="7_sqmir"]
+[ext_resource type="AnimationLibrary" uid="uid://dtk0etqkhf1ta" path="res://Animation/Up.res" id="8_cdkds"]
+[ext_resource type="AnimationLibrary" uid="uid://cfa5maa0adrmk" path="res://Animation/Slide.res" id="9_xvmt0"]
+[ext_resource type="AudioStream" uid="uid://belt26qxgd0pc" path="res://Audio/new_audio_stream_mp_3.tres" id="12_70g4e"]
+[ext_resource type="PackedScene" uid="uid://cpxfe8nfbtat0" path="res://scenes/directional_light_3d.tscn" id="14_a8y0u"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_a8y0u"]
+panorama = ExtResource("2_trceg")
+
+[sub_resource type="Sky" id="Sky_trceg"]
+sky_material = SubResource("PanoramaSkyMaterial_a8y0u")
+
+[sub_resource type="Environment" id="Environment_0f4gt"]
+background_mode = 2
+sky = SubResource("Sky_trceg")
+sdfgi_y_scale = 0
+fog_sky_affect = 0.38
+
+[sub_resource type="Animation" id="Animation_f5a6q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.174533, -3.14159, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.5, 1, -1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("1:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.21948e-09, 0.549627, 0.0278986)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RayCast3D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.66892e-09, 1.82535, 0.0381804)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rus6n"]
+_data = {
+&"RESET": SubResource("Animation_f5a6q")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_av5yj"]
+
+[sub_resource type="FontFile" id="FontFile_6kf4a"]
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_jscy8"]
+
+[node name="Node3D" type="Node3D"]
+process_mode = 3
+script = ExtResource("1_yspfj")
+
+[node name="Play" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Play"]
+environment = SubResource("Environment_0f4gt")
+
+[node name="level" type="Node3D" parent="Play"]
+script = ExtResource("1_84rds")
+module = Array[PackedScene]([ExtResource("2_eqgi6"), ExtResource("4_6lro3")])
+plat = ExtResource("3_elkjq")
+
+[node name="DirectionalLight3D" parent="Play" instance=ExtResource("14_a8y0u")]
+transform = Transform3D(-0.356572, -0.812536, 0.46113, 0.518498, 0.238482, 0.821149, -0.777185, 0.531894, 0.336262, -2.7223, 0.208366, 0)
+visible = true
+light_indirect_energy = 0.545
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="Play"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+visible = false
+script = ExtResource("5_xoma1")
+
+[node name="Running Arc" parent="Play/CharacterBody3D" instance=ExtResource("5_35wen")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.30333e-09, 0)
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="Play/CharacterBody3D/Running Arc"]
+libraries = {
+&"": SubResource("AnimationLibrary_rus6n"),
+&"Ninja": ExtResource("7_sqmir"),
+&"Running": ExtResource("6_n5y23"),
+&"Slide": ExtResource("9_xvmt0"),
+&"Up": ExtResource("8_cdkds")
+}
+autoplay = "Ninja/Running_Ninja"
+
+[node name="Camera3D" type="Camera3D" parent="Play/CharacterBody3D/Running Arc"]
+transform = Transform3D(-1, 4.4023e-07, -2.49667e-06, 0, 0.984808, 0.173648, 2.53518e-06, 0.173648, -0.984808, -0.5, 1, -1)
+
+[node name="RayCast3D" type="RayCast3D" parent="Play/CharacterBody3D/Running Arc"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66892e-09, 1.82535, 0.0381804)
+target_position = Vector3(0, 0, 0.5)
+
+[node name="1" type="RayCast3D" parent="Play/CharacterBody3D/Running Arc"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.21948e-09, 0.549627, 0.0278986)
+visible = false
+target_position = Vector3(0, 0, 0.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Play/CharacterBody3D"]
+shape = SubResource("SphereShape3D_av5yj")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Play"]
+stream = ExtResource("12_70g4e")
+autoplay = true
+mix_target = 1
+parameters/looping = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -249.5
+offset_top = -208.0
+offset_right = 249.5
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_6kf4a")
+theme_override_font_sizes/font_size = 100
+text = "WELCOME "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Play"
+
+[node name="Quit" type="Button" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Quit"
+
+[node name="Defeat" type="CanvasLayer" parent="."]
+process_mode = 3
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Defeat"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -276.5
+offset_top = -208.0
+offset_right = 276.5
+offset_bottom = 208.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="Defeat/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_6kf4a")
+theme_override_font_sizes/font_size = 100
+text = "YOU DIEAD!"
+label_settings = SubResource("LabelSettings_jscy8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Main Manu" type="Button" parent="Defeat/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Main Manu"
+
+[node name="Quit" type="Button" parent="Defeat/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Quit"
+
+[node name="play Again" type="Button" parent="Defeat/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 100
+text = "Play Again"
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer2"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -402.0
+offset_top = 65.0
+offset_right = -162.0
+offset_bottom = 137.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="CanvasLayer2/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 50
+text = "Score:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Play" to="Play/CharacterBody3D" method="_on_play_pressed"]
+[connection signal="size_flags_changed" from="CanvasLayer/VBoxContainer/Play" to="Play/CharacterBody3D" method="_on_play_size_flags_changed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Quit" to="Play/CharacterBody3D" method="_on_quit_pressed"]
+[connection signal="pressed" from="Defeat/VBoxContainer/Main Manu" to="Play/CharacterBody3D" method="_on_x_2_pressed"]
+[connection signal="pressed" from="Defeat/VBoxContainer/Quit" to="Play/CharacterBody3D" method="_on_quit_pressed"]
+[connection signal="pressed" from="Defeat/VBoxContainer/play Again" to="." method="_on_play_again_pressed"]
